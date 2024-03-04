@@ -13,11 +13,14 @@ jobs:
   get_version:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Get version from package.json
         id: semver
         uses: martinbeentjes/npm-get-version-action@main
+
     outputs:
       version: ${{ steps.semver.outputs.current-version }}
 
@@ -25,25 +28,27 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      packages: write
     needs: get_version
     env:
       APP_NAME: ds
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: configure-node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          scope: 'telicent-oss'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+
       - name: Get node version
         id: node
-        run: |
-          echo "version=$(node -v)" >> $GITHUB_OUTPUT
+        run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
 
       - name: Get node_modules cache
         uses: actions/cache@v3.0.2
@@ -55,8 +60,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile
       - run: yarn build
-      - run: yarn publish
+
+      - run: npm publish --access public --provenance
+        env:
+          NPM_CONFIG_PROVENANCE: true
 
