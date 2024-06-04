@@ -20,6 +20,7 @@ export { default as TeliTypeIcon } from "./TeliTypeIcon/TeliTypeIcon";
 export { default as TeliTypeahead } from "./TeliTypeahead/TeliTypeahead";
 export { default as TeliUserProfile } from "./TeliUserProfile/TeliUserProfile";
 export { default as OntologyHierarchy } from "./OntologyHierarchy/OntologyHierarchy";
+export { default as UserFetch } from "./UserFetch/UserFetch";
 export { checkOntology } from "./OntologyHierarchy/OntologyHierarchyFunctions";
 export type { OntologyInputHierarchy } from "./OntologyHierarchy/OntologyHierarchy";
 export * from "./SearchAutocompleteDialog";
