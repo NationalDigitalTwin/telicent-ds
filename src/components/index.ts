@@ -29,3 +29,4 @@ export * from "./TeliList/TeliList";
 export * from "./TeliMenu/TeliMenu";
 export * from "./TeliTabs";
 export * from "./TeliTable";
+export * from "./UserFetch/UserFetch";
