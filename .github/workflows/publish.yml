@@ -38,6 +38,8 @@ jobs:
           name: design-system-build-artifacts
           path: ${{ github.workspace }}/dist
 
-      - run: npm publish --access public --provenance
+      - run: |
+          npm whoami
+          npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
