@@ -39,7 +39,7 @@ jobs:
           path: ${{ github.workspace }}/dist
 
       - run: |
-          npm whoami
-          npm publish --access public --provenance --dry-run
+          npm list token
+          # npm publish --access public --provenance --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
